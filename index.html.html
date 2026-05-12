@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Preferred Lending Partners — Novation Agent Network</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black:     #060606;
+  --surface:   #0f0f0f;
+  --gold:      #c8a84b;
+  --gold-lt:   #e2c87a;
+  --gold-dk:   #7a6220;
+  --white:     #ffffff;
+  --offwhite:  #f0ece6;
+  --grey:      #888078;
+  --border:    rgba(200,168,75,0.28);
+}
+
+html { background: var(--black); }
+
+body {
+  background-color: var(--black);
+  background-image:
+    repeating-linear-gradient(
+      135deg,
+      transparent 0px,
+      transparent 28px,
+      rgba(255,255,255,0.013) 28px,
+      rgba(255,255,255,0.013) 29px
+    );
+  color: var(--white);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+.page {
+  max-width: 480px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.accent-bar {
+  height: 4px;
+  background: linear-gradient(90deg,
+    var(--black) 0%, var(--gold-dk) 8%, var(--gold) 30%,
+    var(--gold-lt) 50%, var(--gold) 70%, var(--gold-dk) 92%, var(--black) 100%
+  );
+}
+
+/* HEADER */
+.header {
+  text-align: center;
+  padding: 52px 28px 44px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  position: relative;
+}
+.header::before {
+  content: '';
+  position: absolute;
+  top: 16px; left: 16px;
+  width: 36px; height: 36px;
+  border-top: 2px solid var(--gold);
+  border-left: 2px solid var(--gold);
+}
+.header::after {
+  content: '';
+  position: absolute;
+  top: 16px; right: 16px;
+  width: 36px; height: 36px;
+  border-top: 2px solid var(--gold);
+  border-right: 2px solid var(--gold);
+}
+
+.logo-zone {
+  margin-bottom: 36px;
+  position: relative;
+}
+.logo-zone::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 280px; height: 280px;
+  background: radial-gradient(ellipse at center,
+    rgba(200,168,75,0.18) 0%, rgba(200,168,75,0.07) 40%, transparent 70%
+  );
+  pointer-events: none;
+  border-radius: 50%;
+}
+.logo-zone img {
+  width: 200px; height: 200px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  mix-blend-mode: lighten;
+  position: relative;
+  z-index: 1;
+}
+
+.vip-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.vip-label-line { width: 28px; height: 1px; background: var(--gold); opacity: 0.7; }
+.vip-label-text {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 9px;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.page-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 38px;
+  line-height: 1.1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+
+.tagline {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1.85;
+  letter-spacing: 0.05em;
+  color: #ddd5c8;
+  max-width: 340px;
+  margin: 0 auto;
+}
+
+/* DIVIDER */
+.divider {
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  margin: 32px 0;
+  gap: 0;
+}
+.div-line { flex: 1; height: 1px; background: var(--gold); opacity: 0.3; }
+.div-center { padding: 0 12px; display: flex; align-items: center; gap: 8px; }
+.div-diamond { width: 7px; height: 7px; border: 1.5px solid var(--gold); transform: rotate(45deg); }
+.div-bar { width: 20px; height: 1.5px; background: var(--gold); opacity: 0.6; }
+
+.section-label {
+  text-align: center;
+  padding: 0 24px 24px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 10px;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* LENDER CARD */
+.lender-card {
+  margin: 0 16px 16px;
+  padding: 0;
+  position: relative;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  overflow: hidden;
+}
+.card-stripe {
+  height: 3px;
+  background: linear-gradient(90deg,
+    var(--gold-dk) 0%, var(--gold) 30%, var(--gold-lt) 50%, var(--gold) 70%, var(--gold-dk) 100%
+  );
+}
+.card-body { padding: 28px 28px 30px; }
+
+.card-corner-bl, .card-corner-tr { position: absolute; width: 24px; height: 24px; }
+.card-corner-bl { bottom: 0; left: 0; border-bottom: 2px solid var(--gold); border-left: 2px solid var(--gold); opacity: 0.5; }
+.card-corner-tr { top: 0; right: 0; border-top: 2px solid var(--gold); border-right: 2px solid var(--gold); opacity: 0.5; }
+
+/* Company logo inside card */
+.company-logo {
+  display: block;
+  height: 48px;
+  max-width: 200px;
+  object-fit: contain;
+  object-position: left center;
+  mix-blend-mode: lighten;
+  margin-bottom: 20px;
+  opacity: 0.9;
+}
+
+.lender-name {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+.lender-firm {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+.rule {
+  width: 48px; height: 2px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  margin-bottom: 20px;
+}
+
+.specs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+.spec {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid rgba(200,168,75,0.4);
+  padding: 6px 14px;
+  background: rgba(200,168,75,0.06);
+}
+
+.contacts { display: flex; flex-direction: column; gap: 15px; }
+.crow { display: flex; align-items: center; gap: 14px; }
+.cico { flex-shrink: 0; }
+.clink {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  letter-spacing: 0.03em;
+  color: var(--offwhite);
+  text-decoration: none;
+}
+.clink:hover { color: var(--gold-lt); }
+
+/* STANDARDS */
+.standards {
+  margin: 16px 16px 0;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  position: relative;
+  overflow: hidden;
+}
+.std-body { padding: 32px 28px 30px; }
+.std-corner-bl, .std-corner-tr { position: absolute; width: 24px; height: 24px; }
+.std-corner-bl { bottom: 0; left: 0; border-bottom: 2px solid var(--gold); border-left: 2px solid var(--gold); opacity: 0.5; }
+.std-corner-tr { top: 0; right: 0; border-top: 2px solid var(--gold); border-right: 2px solid var(--gold); opacity: 0.5; }
+
+.std-eyebrow {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 9px;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 14px;
+}
+.std-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 1.2;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 28px;
+}
+.std-items { display: flex; flex-direction: column; gap: 20px; }
+.std-item { display: flex; align-items: flex-start; gap: 0; }
+.std-copy {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.7;
+  letter-spacing: 0.02em;
+  color: #c8c0b0;
+}
+.std-copy strong {
+  color: var(--white);
+  font-weight: 600;
+  display: block;
+  font-size: 17px;
+  margin-bottom: 2px;
+}
+
+/* FOOTER */
+.footer { padding: 40px 28px 52px; text-align: center; }
+.disclaimer {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 2;
+  letter-spacing: 0.04em;
+  color: #b0a898;
+  font-style: italic;
+  margin-bottom: 28px;
+  padding: 22px 24px;
+  border: 1px solid rgba(200,168,75,0.2);
+  background: rgba(200,168,75,0.04);
+  position: relative;
+}
+.disclaimer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold) 30%, var(--gold-lt) 50%, var(--gold) 70%, transparent);
+  opacity: 0.5;
+}
+.footer-id {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 8px;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: #2a2520;
+}
+.bottom-bar {
+  height: 4px;
+  background: linear-gradient(90deg,
+    var(--black) 0%, var(--gold-dk) 8%, var(--gold) 30%,
+    var(--gold-lt) 50%, var(--gold) 70%, var(--gold-dk) 92%, var(--black) 100%
+  );
+}
+
+@media (min-width: 520px) {
+  body { display: flex; justify-content: center; }
+  .page { width: 100%; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="accent-bar"></div>
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="logo-zone">
+      <img src="nan-logo.png" alt="Novation Agent Network" />
+    </div>
+    <div class="vip-label">
+      <div class="vip-label-line"></div>
+      <div class="vip-label-text">Novation Agent Network</div>
+      <div class="vip-label-line"></div>
+    </div>
+    <h1 class="page-title">Preferred<br>Lending Partners</h1>
+    <p class="tagline">Strategic financing partners aligned with the standards of the Novation Agent Network.</p>
+  </div>
+
+  <div class="divider">
+    <div class="div-line"></div>
+    <div class="div-center"><div class="div-bar"></div><div class="div-diamond"></div><div class="div-bar"></div></div>
+    <div class="div-line"></div>
+  </div>
+
+  <div class="section-label">Lending Partners</div>
+
+  <!-- CAROL POPE -->
+  <div class="lender-card">
+    <div class="card-stripe"></div>
+    <span class="card-corner-bl"></span>
+    <span class="card-corner-tr"></span>
+    <div class="card-body">
+      <img src="empire-logo.png" alt="Empire Home Loans" class="company-logo" />
+      <div class="lender-name">Carol Pope</div>
+      <div class="lender-firm">Empire Home Loans</div>
+      <div class="rule"></div>
+      <div class="specs">
+        <span class="spec">Residential</span>
+        <span class="spec">First-Time Buyers</span>
+        <span class="spec">Investor</span>
+        <span class="spec">Commercial</span>
+      </div>
+      <div class="contacts">
+        <div class="crow">
+          <svg class="cico" width="17" height="17" viewBox="0 0 17 17" fill="none"><rect x="1" y="3.5" width="15" height="10" rx="1.8" stroke="#c8a84b" stroke-width="1.1"/><path d="M1 5.5l7.5 4.5 7.5-4.5" stroke="#c8a84b" stroke-width="1.1"/></svg>
+          <a href="mailto:carol@empirehomeloans.com" class="clink">carol@empirehomeloans.com</a>
+        </div>
+        <div class="crow">
+          <svg class="cico" width="17" height="17" viewBox="0 0 17 17" fill="none"><rect x="3" y="1" width="11" height="15" rx="2" stroke="#c8a84b" stroke-width="1.1"/><line x1="5.5" y1="5" x2="11.5" y2="5" stroke="#c8a84b" stroke-width="1.1"/><line x1="5.5" y1="8" x2="11.5" y2="8" stroke="#c8a84b" stroke-width="1.1"/><line x1="5.5" y1="11" x2="8.5" y2="11" stroke="#c8a84b" stroke-width="1.1"/></svg>
+          <a href="tel:2533802734" class="clink">253-380-2734</a>
+        </div>
+        <div class="crow">
+          <svg class="cico" width="17" height="17" viewBox="0 0 17 17" fill="none"><circle cx="8.5" cy="8.5" r="7" stroke="#c8a84b" stroke-width="1.1"/><path d="M8.5 1.5S11 4.5 11 8.5s-2.5 7-2.5 7M1.5 8.5h14" stroke="#c8a84b" stroke-width="1.1"/></svg>
+          <a href="https://www.carolpope.com" target="_blank" class="clink">carolpope.com</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider" style="padding: 0 60px; margin: 14px 0;">
+    <div class="div-line"></div>
+    <div class="div-center" style="padding: 0 8px;"><div class="div-diamond" style="width:5px;height:5px;border-width:1px;opacity:0.5;"></div></div>
+    <div class="div-line"></div>
+  </div>
+
+  <!-- MICHAEL PRENTICE -->
+  <div class="lender-card">
+    <div class="card-stripe"></div>
+    <span class="card-corner-bl"></span>
+    <span class="card-corner-tr"></span>
+    <div class="card-body">
+      <img src="vision-logo.png" alt="Vision Mortgage Group" class="company-logo" style="height:52px;width:52px;object-fit:contain;" />
+      <div class="lender-name">Michael Prentice</div>
+      <div class="lender-firm">Vision Mortgage Group</div>
+      <div class="rule"></div>
+      <div class="specs">
+        <span class="spec">DSCR</span>
+        <span class="spec">Investor</span>
+        <span class="spec">Commercial</span>
+        <span class="spec">Nationwide</span>
+      </div>
+      <div class="contacts">
+        <div class="crow">
+          <svg class="cico" width="17" height="17" viewBox="0 0 17 17" fill="none"><rect x="1" y="3.5" width="15" height="10" rx="1.8" stroke="#c8a84b" stroke-width="1.1"/><path d="M1 5.5l7.5 4.5 7.5-4.5" stroke="#c8a84b" stroke-width="1.1"/></svg>
+          <a href="mailto:MPrentice@VisionMtg.com" class="clink">MPrentice@VisionMtg.com</a>
+        </div>
+        <div class="crow">
+          <svg class="cico" width="17" height="17" viewBox="0 0 17 17" fill="none"><rect x="3" y="1" width="11" height="15" rx="2" stroke="#c8a84b" stroke-width="1.1"/><line x1="5.5" y1="5" x2="11.5" y2="5" stroke="#c8a84b" stroke-width="1.1"/><line x1="5.5" y1="8" x2="11.5" y2="8" stroke="#c8a84b" stroke-width="1.1"/><line x1="5.5" y1="11" x2="8.5" y2="11" stroke="#c8a84b" stroke-width="1.1"/></svg>
+          <a href="tel:7023517692" class="clink">702-351-7692</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider" style="padding: 0 60px; margin: 14px 0;">
+    <div class="div-line"></div>
+    <div class="div-center" style="padding: 0 8px;"><div class="div-diamond" style="width:5px;height:5px;border-width:1px;opacity:0.5;"></div></div>
+    <div class="div-line"></div>
+  </div>
+
+  <!-- DANIEL BELLOMY -->
+  <div class="lender-card">
+    <div class="card-stripe"></div>
+    <span class="card-corner-bl"></span>
+    <span class="card-corner-tr"></span>
+    <div class="card-body">
+      <img src="power-lending-logo.png" alt="Power Lending" class="company-logo" />
+      <div class="lender-name">Daniel Bellomy</div>
+      <div class="lender-firm">Power Lending</div>
+      <div class="rule"></div>
+      <div class="specs">
+        <span class="spec">Residential</span>
+        <span class="spec">Commercial</span>
+        <span class="spec">Investor</span>
+        <span class="spec">Creative Financing</span>
+        <span class="spec">All States (Excl. NY)</span>
+      </div>
+      <div class="contacts">
+        <div class="crow">
+          <svg class="cico" width="17" height="17" viewBox="0 0 17 17" fill="none"><rect x="1" y="3.5" width="15" height="10" rx="1.8" stroke="#c8a84b" stroke-width="1.1"/><path d="M1 5.5l7.5 4.5 7.5-4.5" stroke="#c8a84b" stroke-width="1.1"/></svg>
+          <a href="mailto:dbellomy@power-lending.com" class="clink">dbellomy@power-lending.com</a>
+        </div>
+        <div class="crow">
+          <svg class="cico" width="17" height="17" viewBox="0 0 17 17" fill="none"><rect x="3" y="1" width="11" height="15" rx="2" stroke="#c8a84b" stroke-width="1.1"/><line x1="5.5" y1="5" x2="11.5" y2="5" stroke="#c8a84b" stroke-width="1.1"/><line x1="5.5" y1="8" x2="11.5" y2="8" stroke="#c8a84b" stroke-width="1.1"/><line x1="5.5" y1="11" x2="8.5" y2="11" stroke="#c8a84b" stroke-width="1.1"/></svg>
+          <a href="tel:9496162271" class="clink">949-616-2271</a>
+        </div>
+        <div class="crow">
+          <svg class="cico" width="17" height="17" viewBox="0 0 17 17" fill="none"><rect x="1" y="3.5" width="15" height="10" rx="1.8" stroke="#c8a84b" stroke-width="1.1"/><path d="M1 5.5l7.5 4.5 7.5-4.5" stroke="#c8a84b" stroke-width="1.1"/></svg>
+          <span class="clink" style="color:#888078;font-size:12px;letter-spacing:0.08em;">Preferred contact: Email or Text</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIVIDER BEFORE STANDARDS -->
+  <div class="divider" style="margin: 28px 0 24px;">
+    <div class="div-line"></div>
+    <div class="div-center"><div class="div-bar"></div><div class="div-diamond"></div><div class="div-bar"></div></div>
+    <div class="div-line"></div>
+  </div>
+
+  <!-- STANDARDS -->
+  <div class="standards">
+    <div class="card-stripe"></div>
+    <span class="std-corner-bl"></span>
+    <span class="std-corner-tr"></span>
+    <div class="std-body">
+      <div class="std-eyebrow">Network Standards</div>
+      <div class="std-title">What Distinguishes<br>A Preferred Partner</div>
+      <div class="std-items">
+        <div class="std-item"><div class="std-copy"><strong>Strong communication</strong> at every stage of the transaction</div></div>
+        <div class="std-item"><div class="std-copy"><strong>Fast response times</strong> when timing matters most</div></div>
+        <div class="std-item"><div class="std-copy"><strong>Solution-oriented mindset</strong> in complex financing scenarios</div></div>
+        <div class="std-item"><div class="std-copy"><strong>Consistent follow-through</strong> from application to close</div></div>
+        <div class="std-item"><div class="std-copy"><strong>Capacity to support agents and clients</strong> at the highest level</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider" style="margin: 36px 0 0;">
+    <div class="div-line"></div>
+    <div class="div-center"><div class="div-bar"></div><div class="div-diamond"></div><div class="div-bar"></div></div>
+    <div class="div-line"></div>
+  </div>
+
+  <div class="footer">
+    <div class="disclaimer">Preferred lenders are independent parties and agents and clients are always encouraged to determine the best fit for their individual transaction needs.</div>
+    <div class="footer-id">Novation Agent Network &nbsp;&middot;&nbsp; Private Resource</div>
+  </div>
+
+  <div class="bottom-bar"></div>
+
+</div>
+</body>
+</html>
